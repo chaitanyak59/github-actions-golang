@@ -1,18 +1,21 @@
-name: Basic Github Actions for GO
+name: Basic Lint JOB
+
 on:
   push:
     branches:
       - master
 
 jobs:
-    Go-Lint:
-        runs-on: ubuntu-18.04
-        steps:
-            - uses: actions/checkout@v2
-            - uses: golangci/golangci-lint-action@master
-              with:
-                version: v1.27
-                github-token: ${{ secrets.github_token }}
-            - name: Lint tests
-              run: |
-                   golangci-lint run 
+  lint:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '1.14.x'
+
+      - name: Lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.26.0
+
+          golangci-lint run
