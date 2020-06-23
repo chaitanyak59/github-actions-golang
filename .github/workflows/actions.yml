@@ -13,3 +13,6 @@ jobs:
               with:
                 version: v1.27
                 github-token: ${{ secrets.github_token }}
+            - name: Lint tests
+              run: |
+                   golangci-lint run 
