@@ -1,0 +1,12 @@
+name: Basic Github Actions for GO
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+    echo_test:
+        runs-on: ubuntu-18.04
+        steps: 
+            - name: Echo Output!
+              run: echo "Hello Chaitanya!"
